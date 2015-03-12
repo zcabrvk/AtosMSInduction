@@ -11,10 +11,10 @@ using AtosInduction.Resources;
 
 namespace AtosInduction
 {
-    public partial class MainPage : PhoneApplicationPage
+    public partial class MSInduction : PhoneApplicationPage
     {
         // Constructor
-        public MainPage()
+        public MSInduction()
         {
             InitializeComponent();
 

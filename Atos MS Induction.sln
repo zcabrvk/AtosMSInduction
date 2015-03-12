@@ -5,13 +5,42 @@ VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AtosInduction", "AtosInduction\AtosInduction.csproj", "{E014CC20-1EBD-40E9-87BE-1371E3F7B00F}"
 EndProject
+Project("{911E67C6-3D85-4FCE-B560-20A9C3E3FF48}") = "NuGet", "..\..\..\..\Downloads\MobileOAuth-master\MobileOAuth-master\.nuget\NuGet.exe", "{F3DC8F34-7139-4390-A236-826F5712077A}"
+	ProjectSection(DebuggerProjectSystem) = preProject
+		PortSupplier = 00000000-0000-0000-0000-000000000000
+		Executable = C:\Users\Rajind\Downloads\MobileOAuth-master\MobileOAuth-master\.nuget\NuGet.exe
+		RemoteMachine = RAJINDSMACBOOK
+		StartingDirectory = C:\Users\Rajind\Downloads\MobileOAuth-master\MobileOAuth-master\.nuget
+		Environment = Default
+		LaunchingEngine = 00000000-0000-0000-0000-000000000000
+		UseLegacyDebugEngines = No
+		LaunchSQLEngine = No
+		AttachLaunchAction = No
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{60A72D68-DFCB-4307-B149-B1D4A377B42A}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\..\..\Downloads\MobileOAuth-master\MobileOAuth-master\.nuget\NuGet.Config = ..\..\..\..\Downloads\MobileOAuth-master\MobileOAuth-master\.nuget\NuGet.Config
+		..\..\..\..\Downloads\MobileOAuth-master\MobileOAuth-master\.nuget\NuGet.exe = ..\..\..\..\Downloads\MobileOAuth-master\MobileOAuth-master\.nuget\NuGet.exe
+		..\..\..\..\Downloads\MobileOAuth-master\MobileOAuth-master\.nuget\NuGet.targets = ..\..\..\..\Downloads\MobileOAuth-master\MobileOAuth-master\.nuget\NuGet.targets
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget (2)", ".nuget (2)", "{4E95A4A1-3108-4117-9573-15DE3BFFCB21}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\..\..\Downloads\MobileOAuth-master\MobileOAuth-master\.nuget\NuGet.Config = ..\..\..\..\Downloads\MobileOAuth-master\MobileOAuth-master\.nuget\NuGet.Config
+		..\..\..\..\Downloads\MobileOAuth-master\MobileOAuth-master\.nuget\NuGet.exe = ..\..\..\..\Downloads\MobileOAuth-master\MobileOAuth-master\.nuget\NuGet.exe
+		..\..\..\..\Downloads\MobileOAuth-master\MobileOAuth-master\.nuget\NuGet.targets = ..\..\..\..\Downloads\MobileOAuth-master\MobileOAuth-master\.nuget\NuGet.targets
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Debug|ARM = Debug|ARM
+		Debug|Mixed Platforms = Debug|Mixed Platforms
 		Debug|x86 = Debug|x86
 		Release|Any CPU = Release|Any CPU
 		Release|ARM = Release|ARM
+		Release|Mixed Platforms = Release|Mixed Platforms
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
@@ -21,6 +50,9 @@ Global
 		{E014CC20-1EBD-40E9-87BE-1371E3F7B00F}.Debug|ARM.ActiveCfg = Debug|ARM
 		{E014CC20-1EBD-40E9-87BE-1371E3F7B00F}.Debug|ARM.Build.0 = Debug|ARM
 		{E014CC20-1EBD-40E9-87BE-1371E3F7B00F}.Debug|ARM.Deploy.0 = Debug|ARM
+		{E014CC20-1EBD-40E9-87BE-1371E3F7B00F}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{E014CC20-1EBD-40E9-87BE-1371E3F7B00F}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{E014CC20-1EBD-40E9-87BE-1371E3F7B00F}.Debug|Mixed Platforms.Deploy.0 = Debug|Any CPU
 		{E014CC20-1EBD-40E9-87BE-1371E3F7B00F}.Debug|x86.ActiveCfg = Debug|x86
 		{E014CC20-1EBD-40E9-87BE-1371E3F7B00F}.Debug|x86.Build.0 = Debug|x86
 		{E014CC20-1EBD-40E9-87BE-1371E3F7B00F}.Debug|x86.Deploy.0 = Debug|x86
@@ -30,9 +62,20 @@ Global
 		{E014CC20-1EBD-40E9-87BE-1371E3F7B00F}.Release|ARM.ActiveCfg = Release|ARM
 		{E014CC20-1EBD-40E9-87BE-1371E3F7B00F}.Release|ARM.Build.0 = Release|ARM
 		{E014CC20-1EBD-40E9-87BE-1371E3F7B00F}.Release|ARM.Deploy.0 = Release|ARM
+		{E014CC20-1EBD-40E9-87BE-1371E3F7B00F}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{E014CC20-1EBD-40E9-87BE-1371E3F7B00F}.Release|Mixed Platforms.Build.0 = Release|x86
+		{E014CC20-1EBD-40E9-87BE-1371E3F7B00F}.Release|Mixed Platforms.Deploy.0 = Release|x86
 		{E014CC20-1EBD-40E9-87BE-1371E3F7B00F}.Release|x86.ActiveCfg = Release|x86
 		{E014CC20-1EBD-40E9-87BE-1371E3F7B00F}.Release|x86.Build.0 = Release|x86
 		{E014CC20-1EBD-40E9-87BE-1371E3F7B00F}.Release|x86.Deploy.0 = Release|x86
+		{F3DC8F34-7139-4390-A236-826F5712077A}.Debug|Any CPU.ActiveCfg = Debug
+		{F3DC8F34-7139-4390-A236-826F5712077A}.Debug|ARM.ActiveCfg = Debug
+		{F3DC8F34-7139-4390-A236-826F5712077A}.Debug|Mixed Platforms.ActiveCfg = Debug
+		{F3DC8F34-7139-4390-A236-826F5712077A}.Debug|x86.ActiveCfg = Debug
+		{F3DC8F34-7139-4390-A236-826F5712077A}.Release|Any CPU.ActiveCfg = Debug
+		{F3DC8F34-7139-4390-A236-826F5712077A}.Release|ARM.ActiveCfg = Debug
+		{F3DC8F34-7139-4390-A236-826F5712077A}.Release|Mixed Platforms.ActiveCfg = Debug
+		{F3DC8F34-7139-4390-A236-826F5712077A}.Release|x86.ActiveCfg = Debug
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

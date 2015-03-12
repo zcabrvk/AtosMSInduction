@@ -7,14 +7,20 @@ using System.Windows.Controls;
 using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
+using AtosInduction.Resources;
 
 namespace AtosInduction
 {
-    public partial class Page1 : PhoneApplicationPage
+    public partial class MainPage : PhoneApplicationPage
     {
-        public Page1()
+        public MainPage()
         {
             InitializeComponent();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/HomeScreen.xaml", UriKind.Relative));
         }
     }
 }

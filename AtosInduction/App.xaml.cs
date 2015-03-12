@@ -21,6 +21,7 @@ namespace AtosInduction
         /// <summary>
         /// Constructor for the Application object.
         /// </summary>
+        public static bool loggedin = false;
         public App()
         {
             // Global handler for uncaught exceptions.
