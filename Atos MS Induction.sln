@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.21005.1
+# Visual Studio Express 2013 for Windows
+VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AtosInduction", "AtosInduction\AtosInduction.csproj", "{E014CC20-1EBD-40E9-87BE-1371E3F7B00F}"
 EndProject
@@ -16,20 +16,6 @@ Project("{911E67C6-3D85-4FCE-B560-20A9C3E3FF48}") = "NuGet", "..\..\..\..\Downlo
 		UseLegacyDebugEngines = No
 		LaunchSQLEngine = No
 		AttachLaunchAction = No
-	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{60A72D68-DFCB-4307-B149-B1D4A377B42A}"
-	ProjectSection(SolutionItems) = preProject
-		..\..\..\..\Downloads\MobileOAuth-master\MobileOAuth-master\.nuget\NuGet.Config = ..\..\..\..\Downloads\MobileOAuth-master\MobileOAuth-master\.nuget\NuGet.Config
-		..\..\..\..\Downloads\MobileOAuth-master\MobileOAuth-master\.nuget\NuGet.exe = ..\..\..\..\Downloads\MobileOAuth-master\MobileOAuth-master\.nuget\NuGet.exe
-		..\..\..\..\Downloads\MobileOAuth-master\MobileOAuth-master\.nuget\NuGet.targets = ..\..\..\..\Downloads\MobileOAuth-master\MobileOAuth-master\.nuget\NuGet.targets
-	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget (2)", ".nuget (2)", "{4E95A4A1-3108-4117-9573-15DE3BFFCB21}"
-	ProjectSection(SolutionItems) = preProject
-		..\..\..\..\Downloads\MobileOAuth-master\MobileOAuth-master\.nuget\NuGet.Config = ..\..\..\..\Downloads\MobileOAuth-master\MobileOAuth-master\.nuget\NuGet.Config
-		..\..\..\..\Downloads\MobileOAuth-master\MobileOAuth-master\.nuget\NuGet.exe = ..\..\..\..\Downloads\MobileOAuth-master\MobileOAuth-master\.nuget\NuGet.exe
-		..\..\..\..\Downloads\MobileOAuth-master\MobileOAuth-master\.nuget\NuGet.targets = ..\..\..\..\Downloads\MobileOAuth-master\MobileOAuth-master\.nuget\NuGet.targets
 	EndProjectSection
 EndProject
 Global

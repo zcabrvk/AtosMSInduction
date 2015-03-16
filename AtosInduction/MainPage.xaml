@@ -27,7 +27,7 @@
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
             <Image HorizontalAlignment="Center" Height="133" Margin="10,169,0,0" VerticalAlignment="Top" Width="436" Source="/Assets/AtosLogo.png"/>
             <TextBlock HorizontalAlignment="Center" Margin="4,348,0,0" TextWrapping="Wrap" Text="Please Login using your Google Account" VerticalAlignment="Top" Foreground="#DEFFFFFF"/>
-            <Button Content="Button" HorizontalAlignment="Center" Margin="0,380,0,0" VerticalAlignment="Top" Width="279" Foreground="#DEFFFFFF" Click="Button_Click"/>
+            <Button Content="Login" HorizontalAlignment="Center" Margin="0,380,0,0" VerticalAlignment="Top" Width="279" Foreground="#DEFFFFFF" Click="Button_Click"/>
 
         </Grid>
     </Grid>

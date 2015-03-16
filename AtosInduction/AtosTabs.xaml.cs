@@ -11,10 +11,10 @@ using AtosInduction.Resources;
 
 namespace AtosInduction
 {
-    public partial class MSInduction : PhoneApplicationPage
+    public partial class AtosTabs : PhoneApplicationPage
     {
         // Constructor
-        public MSInduction()
+        public AtosTabs()
         {
             InitializeComponent();
 
@@ -36,7 +36,7 @@ namespace AtosInduction
             ApplicationBar.IsMenuEnabled = true;
 
             ApplicationBarMenuItem item;
-            foreach (PanoramaItem tab in this.Panorama.Items) //Add a menu item for each tab in the panorama page
+            foreach (PanoramaItem tab in this.AtosPanorama.Items) //Add a menu item for each tab in the panorama page
             {
                 item = new ApplicationBarMenuItem();
                 item.Text = (string)tab.Header;
@@ -53,7 +53,7 @@ namespace AtosInduction
             {
                 if (pressed.Text.CompareTo(item.Text) == 0)
                 {
-                    this.Panorama.DefaultItem = this.Panorama.Items[i];
+                    this.AtosPanorama.DefaultItem = this.AtosPanorama.Items[i];
                 }
                 i++;
             }

@@ -9,7 +9,7 @@
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
     xmlns:Primitives="clr-namespace:Microsoft.Phone.Controls.Primitives;assembly=Microsoft.Phone"
-    x:Class="AtosInduction.MSInduction"
+    x:Class="AtosInduction.AtosTabs"
     mc:Ignorable="d"
     SupportedOrientations="Portrait" Orientation="Portrait"
     shell:SystemTray.IsVisible="True">
@@ -86,17 +86,18 @@
                 <ColumnDefinition Width="0*"/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <phone:Panorama Name="Panorama" HorizontalAlignment="Left" Height="768" Title="managed services induction" VerticalAlignment="Top" Width="480" Background="White" Grid.ColumnSpan="2" Loaded="Panorama_Loaded" Foreground="{StaticResource BaseColor}" Style="{StaticResource PanoramaStyle1}">
+            <phone:Panorama Name="AtosPanorama" HorizontalAlignment="Left" Height="768" Title="about Atos" VerticalAlignment="Top" Width="480" Background="White" Grid.ColumnSpan="2" Loaded="Panorama_Loaded" Foreground="{StaticResource BaseColor}" Style="{StaticResource PanoramaStyle1}">
                 <phone:PanoramaItem CacheMode="{x:Null}" Header="home" Style="{StaticResource PanoramaItemStyle1_Large_Subheading}">
-                    <phone:WebBrowser IsHitTestVisible="false" Source="http://atos.net/en-us/home/we-are.html"/>
                 </phone:PanoramaItem>
-                <phone:PanoramaItem CacheMode="{x:Null}" Header="structure" Style="{StaticResource PanoramaItemStyle1_Large_Subheading}">
+                <phone:PanoramaItem CacheMode="{x:Null}" Header="who are Atos?" Style="{StaticResource PanoramaItemStyle1_Large_Subheading}">
                 </phone:PanoramaItem>
-                <phone:PanoramaItem CacheMode="{x:Null}" Header="operational targets" FontSize="9" Style="{StaticResource PanoramaItemStyle1_Large_Subheading}">
+                <phone:PanoramaItem CacheMode="{x:Null}" Header="where do I fit?" FontSize="9" Style="{StaticResource PanoramaItemStyle1_Large_Subheading}">
                 </phone:PanoramaItem>
-                <phone:PanoramaItem CacheMode="{x:Null}" Header="essentials" Style="{StaticResource PanoramaItemStyle1_Large_Subheading}">
+                <phone:PanoramaItem CacheMode="{x:Null}" Header="Atos customers" Style="{StaticResource PanoramaItemStyle1_Large_Subheading}">
                 </phone:PanoramaItem>
-                <phone:PanoramaItem CacheMode="{x:Null}" Header="department induction" Style="{StaticResource PanoramaItemStyle1_Large_Subheading}">
+                <phone:PanoramaItem CacheMode="{x:Null}" Header="company structure" Style="{StaticResource PanoramaItemStyle1_Large_Subheading}">
+                </phone:PanoramaItem>
+                <phone:PanoramaItem CacheMode="{x:Null}" Header="operational targets" Style="{StaticResource PanoramaItemStyle1_Large_Subheading}">
                 </phone:PanoramaItem>
                 <phone:PanoramaItem CacheMode="{x:Null}" Header="where next?" Style="{StaticResource PanoramaItemStyle1_Large_Subheading}">
                 </phone:PanoramaItem>
