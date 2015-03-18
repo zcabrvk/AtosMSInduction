@@ -10,7 +10,7 @@ using Microsoft.Phone.Shell;
 
 namespace AtosInduction
 {
-    class Tab
+    public class Tab
     {
         public string content { get; private set; }
         public string url { get; private set; }
@@ -24,8 +24,8 @@ namespace AtosInduction
 
     public partial class PivotMainPage : PhoneApplicationPage
     {
-        List<Tab> Atos = new List<Tab>();
-        List<Tab> MS = new List<Tab>();
+        private List<Tab> Atos = new List<Tab>();
+        private List<Tab> MS = new List<Tab>();
 
         public PivotMainPage()
         {
@@ -99,22 +99,17 @@ namespace AtosInduction
         {
             NavigationService.Navigate(new Uri("/WebBrowser.xaml?url=" + ((sender as ListBox).SelectedValue as string), UriKind.RelativeOrAbsolute));
 
+            if (((sender as ListBox).Name as string).CompareTo("AtosTabs") == 0)
+                WebBrowser.tabs = this.Atos.AsReadOnly();
+            else
+                WebBrowser.tabs = this.MS.AsReadOnly();
+
             (sender as ListBox).SelectedIndex = -1; //deselect item
-        }
-
-        private void PivotItem_GotFocus(object sender, RoutedEventArgs e)
-        {
-
         }
 
         private void Pivot_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             FlurryWP8SDK.Api.LogEvent((this.Pivot.SelectedItem as PivotItem).Header.ToString());
-        }
-
-        private void Pivot_Loaded(object sender, RoutedEventArgs e)
-        {
-
         }
     }
 }
