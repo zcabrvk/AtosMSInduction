@@ -15,16 +15,15 @@
 
     <!--LayoutRoot is the root grid where all page content is placed-->
     <StackPanel x:Name="LayoutRoot" Background="White" Loaded="LayoutRoot_Loaded">
-        <StackPanel Margin="5,5,0,0">
-            <TextBlock Text="Managed Services Induction Portal" Foreground="#FF2474A9" Style="{StaticResource PhoneTextNormalStyle}"/>
-            <Image HorizontalAlignment="Left" Height="114" VerticalAlignment="Top" Width="360" Source="/Assets/AtosBlue.png"/>
+        <StackPanel Margin="5,5,0,0" Height="112">
+            <Image HorizontalAlignment="Center" Height="89" Width="280" Source="/Assets/AtosBlue.png" Margin="96,0,99,0"/>
         </StackPanel>
-        <phone:Pivot Foreground="#FF2474A9">
-            <phone:PivotItem Header="About Atos">
+        <phone:Pivot Foreground="#FF2474A9" SelectionChanged="Pivot_SelectionChanged" FontFamily="Segoe WP Light" Loaded="Pivot_Loaded">
+            <phone:PivotItem Header="about Atos" Margin="28,28,12,0" FontFamily="Segoe WP Light">
                 <ListBox FontSize="{StaticResource PhoneFontSizeExtraLarge}" Name="AtosTabs" Foreground="#FF2474A9" SelectionChanged="OpenPage"/>
             </phone:PivotItem>
             <phone:PivotItem Header="MS Induction">
-                <ListBox FontSize="{StaticResource PhoneFontSizeExtraLarge}" Name="MSTabs" Foreground="#FF2474A9" SelectionChanged="OpenPage"/>
+                <ListBox FontSize="{StaticResource PhoneFontSizeExtraLarge}" Name="MSTabs" Foreground="#FF2474A9" SelectionChanged="OpenPage" Margin="24,0,0,0"/>
             </phone:PivotItem>
         </phone:Pivot>
     </StackPanel>

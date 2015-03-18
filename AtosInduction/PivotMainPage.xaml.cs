@@ -101,5 +101,20 @@ namespace AtosInduction
 
             (sender as ListBox).SelectedIndex = -1; //deselect item
         }
+
+        private void PivotItem_GotFocus(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Pivot_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            FlurryWP8SDK.Api.LogEvent(Pivot.SelectedItemProperty.ToString());
+        }
+
+        private void Pivot_Loaded(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
