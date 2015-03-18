@@ -110,6 +110,7 @@ namespace AtosInduction
         private void Pivot_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             FlurryWP8SDK.Api.LogEvent(Pivot.SelectedItemProperty.ToString());
+            System.Diagnostics.Debug.WriteLine(Pivot.SelectedItemProperty);
         }
 
         private void Pivot_Loaded(object sender, RoutedEventArgs e)
