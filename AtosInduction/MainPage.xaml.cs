@@ -28,7 +28,9 @@ namespace AtosInduction
                 MessageBox.Show("You need Internet conncetion in order to use this app.", "You are not connected.", MessageBoxButton.OK);
             }
             else
+            {
                 NavigationService.Navigate(new Uri("/PivotMainPage.xaml", UriKind.Relative));
+            }
         }
     }
 }
