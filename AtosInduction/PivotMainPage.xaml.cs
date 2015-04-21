@@ -7,6 +7,10 @@ using System.Windows.Controls;
 using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
+using System.IO;
+using Newtonsoft.Json;
+using System.Net.Http.Headers;
+using System.Threading.Tasks;
 
 namespace AtosInduction
 {
@@ -19,6 +23,17 @@ namespace AtosInduction
         {
             this.content = content;
             this.url = url;
+        }
+    }
+
+    class Name
+    {
+        [JsonProperty("displayName")]
+        public readonly string name;
+
+        public Name(string name)
+        {
+            this.name = name;
         }
     }
 
@@ -54,27 +69,41 @@ namespace AtosInduction
             this.MSTabs.ItemsSource = MS;
             this.MSTabs.DisplayMemberPath = "content";
             this.MSTabs.SelectedValuePath = "url";
+
+            setName();
         }
 
-        //Google login
-        private async void LayoutRoot_Loaded(object sender, RoutedEventArgs e)
+        private async void setName()
         {
-            if (!App.loggedin)
+            string key;
+            try
             {
-                OAuthAuthorization authorization = new OAuthAuthorization(
-                "https://accounts.google.com/o/oauth2/auth",
-                "https://accounts.google.com/o/oauth2/token");
-                TokenPair tokenPair = await authorization.Authorize(
-                    "541911829027-6pa6sv71joloj44clqolbc0lojbsj4gj.apps.googleusercontent.com",
-                    "8ZiX2Sk1JHItld3KrZH7boD6",
-                    new string[] { GoogleScopes.UserinfoEmail });
-
-                // Request a new access token using the refresh token (when the access token was expired)
-                TokenPair refreshTokenPair = await authorization.RefreshAccessToken(
-                    "541911829027-6pa6sv71joloj44clqolbc0lojbsj4gj.apps.googleusercontent.com",
-                    "8ZiX2Sk1JHItld3KrZH7boD6",
-                    tokenPair.RefreshToken);
+                key = await LoginScreen.getAccessToken();
             }
+            catch (Exception)
+            {
+                key = "";
+            }
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create("https://www.googleapis.com/plus/v1/people/me?fields=displayName");
+            request.Method = "GET";
+            request.Headers["Authorization"] = "Bearer " + key;
+            string textToDisplay;
+
+            using (HttpWebResponse response = await request.GetResponseAsync())
+            {
+                if (response.StatusCode == HttpStatusCode.OK) //successful query!
+                {
+                    using (StreamReader streamReader = new StreamReader(response.GetResponseStream()))
+                    {
+                        string str = streamReader.ReadToEnd();
+                        textToDisplay = "Welcome " + JsonConvert.DeserializeObject<Name>(str).name;
+                    }
+                }
+                else
+                    textToDisplay = "";
+            }
+
+            this.Name.Text = textToDisplay;
         }
 
         private void addAtosListItem(string content, string url)
@@ -89,10 +118,13 @@ namespace AtosInduction
             this.MS.Add(item);
         }
 
-        //If the user press the back button exit the app
+        //If the user press the back button exit the app (empty Navigation stack)
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            NavigationService.RemoveBackEntry();
+            while (NavigationService.CanGoBack)
+            {
+                NavigationService.RemoveBackEntry();
+            }
         }
 
         private void OpenPage(object sender, SelectionChangedEventArgs args)
@@ -111,6 +143,17 @@ namespace AtosInduction
         {
             FlurryWP8SDK.Api.LogEvent((this.Pivot.SelectedItem as PivotItem).Header.ToString());
             System.Diagnostics.Debug.WriteLine((this.Pivot.SelectedItem as PivotItem).Header.ToString());
+        }
+
+        private void Logout(object sender, EventArgs e)
+        {
+            Task.Run(async () => {
+                HttpWebRequest request = (HttpWebRequest)WebRequest.Create("https://accounts.google.com/o/oauth2/revoke?token=" + await LoginScreen.getAccessToken());
+                await request.GetResponseAsync();
+                if (await LoginScreen.isThereTokenFile())
+                    LoginScreen.deleteTokenFile();
+                });
+            NavigationService.Navigate(new Uri("/LoginScreen.xaml", UriKind.RelativeOrAbsolute));
         }
     }
 }

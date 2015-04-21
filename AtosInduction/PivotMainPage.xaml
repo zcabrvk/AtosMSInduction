@@ -9,23 +9,31 @@
     mc:Ignorable="d"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
-    Foreground="{StaticResource PhoneForegroundBrush}"
+    Foreground="#FF2474A9"
     SupportedOrientations="Portrait"  Orientation="Portrait"
     shell:SystemTray.IsVisible="True">
 
+    <phone:PhoneApplicationPage.ApplicationBar>
+        <shell:ApplicationBar IsVisible="True" BackgroundColor="#FF2474A9" IsMenuEnabled="False" Mode="Minimized">
+            <shell:ApplicationBarIconButton IconUri="/Assets/AppBar/questionmark.png" Text="help"/>
+            <shell:ApplicationBarIconButton IconUri="/Assets/AppBar2/back.png" Click="Logout" Text="logout"/>
+        </shell:ApplicationBar>
+    </phone:PhoneApplicationPage.ApplicationBar>
+
+
     <!--LayoutRoot is the root grid where all page content is placed-->
-    <StackPanel x:Name="LayoutRoot" Background="White" Loaded="LayoutRoot_Loaded">
-        <StackPanel Margin="5,5,0,0" Height="112">
+    <StackPanel x:Name="LayoutRoot" Background="White">
+        <StackPanel Margin="5,5,0,0" Height="auto">
             <Image HorizontalAlignment="Center" Height="89" Width="280" Source="/Assets/AtosBlue.png" Margin="0,10,0,0"/>
+            <TextBlock Name="Name" Margin="15,30,15,0" TextWrapping="Wrap" FontSize="{StaticResource PhoneFontSizeMediumLarge}"/>
         </StackPanel>
-        <phone:Pivot Name="Pivot" Foreground="#FF2474A9" SelectionChanged="Pivot_SelectionChanged" FontFamily="Segoe WP Light">
-            <phone:PivotItem Header="about Atos" Margin="28,28,12,0" FontFamily="Segoe WP Light">
-                <ListBox FontSize="{StaticResource PhoneFontSizeExtraLarge}" Name="AtosTabs" Foreground="#FF2474A9" SelectionChanged="OpenPage"/>
+        <phone:Pivot Name="Pivot" Foreground="#FF2474A9" SelectionChanged="Pivot_SelectionChanged" FontFamily="Segoe WP Light" Margin="0,-20,0,0">
+            <phone:PivotItem Header="about Atos">
+                <ListBox FontSize="{StaticResource PhoneFontSizeExtraLarge}" Name="AtosTabs" SelectionChanged="OpenPage" Foreground="#FF2474A9" Margin="20,-20,0,0"/>
             </phone:PivotItem>
             <phone:PivotItem Header="MS Induction">
-                <ListBox FontSize="{StaticResource PhoneFontSizeExtraLarge}" Name="MSTabs" Foreground="#FF2474A9" SelectionChanged="OpenPage" Margin="24,0,0,0"/>
+                <ListBox FontSize="{StaticResource PhoneFontSizeExtraLarge}" Name="MSTabs" SelectionChanged="OpenPage" Foreground="#FF2474A9" Margin="20,-20,0,0"/>
             </phone:PivotItem>
         </phone:Pivot>
     </StackPanel>
-
 </phone:PhoneApplicationPage>

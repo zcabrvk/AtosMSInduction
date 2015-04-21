@@ -26,7 +26,7 @@ namespace AtosInduction
             string clientId = parameters["clientId"];
             string scope = parameters["scope"];
 
-            string uri = string.Format("{0}?response_type=code&client_id={1}&redirect_uri={2}&scope={3}",
+            string uri = string.Format("{0}?response_type=code&client_id={1}&redirect_uri={2}&scope={3}&approval_prompt=auto",
                 authEndpoint,
                 clientId,
                 "urn:ietf:wg:oauth:2.0:oob",
@@ -35,7 +35,7 @@ namespace AtosInduction
             webBrowser.Navigate(new Uri(uri, UriKind.Absolute));
         }
 
-        private void webBrowser_Navigated(object sender, NavigationEventArgs e)
+        private async void webBrowser_Navigated(object sender, NavigationEventArgs e)
         {
             string title = (string)webBrowser.InvokeScript("eval", "document.title.toString()");
 
@@ -44,7 +44,11 @@ namespace AtosInduction
                 string authorizationCode = title.Substring(title.IndexOf('=') + 1);
                 PhoneApplicationService.Current.State["AtosInduction.AuthorizationCode"] = authorizationCode;
                 App.loggedin = true;
-                //MessageBox.Show(authorizationCode);
+                await webBrowser.ClearInternetCacheAsync();
+                NavigationService.GoBack();
+            }
+            else if(title.StartsWith("Denied")) //Consent refused
+            {
                 NavigationService.GoBack();
             }
         }

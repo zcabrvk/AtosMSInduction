@@ -23,7 +23,7 @@ namespace AtosInduction
         public static readonly string GoogleDrive = "https://www.googleapis.com/auth/drive";
         public static readonly string GoogleDriveFiles = "https://www.googleapis.com/auth/drive.file";
         public static readonly string Gmail = "https://mail.google.com/mail/feed/atom";
-        //public static readonly string Google+ https://www.googleapis.com/auth/plus.me";
+        public static readonly string GooglePlus = "https://www.googleapis.com/auth/plus.me";
         public static readonly string GroupsProvisioning = "https://apps-apis.google.com/a/feeds/groups/";
         //public static readonly string GoogleLatitude = "https://www.googleapis.com/auth/latitude.all.best https://www.googleapis.com/auth/latitude.all.city";
         public static readonly string Moderator = "https://www.googleapis.com/auth/moderator";
