@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using System.Linq;
 using System.Net;
 using System.Windows;
@@ -9,28 +10,59 @@ using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using AtosInduction.Resources;
 using Microsoft.Phone.Net.NetworkInformation;
+using Windows.Storage;
+using Windows.Storage.Streams;
+using Newtonsoft.Json;
+using System.Windows.Controls.Primitives;
+using System.ComponentModel;
+using System.Threading;
 
 namespace AtosInduction
 {
     public partial class MainPage : PhoneApplicationPage
     {
-        public MainPage()
-        {
+        public MainPage() {
             InitializeComponent();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
-            bool isConnectionAvailable = (NetworkInterface.NetworkInterfaceType != NetworkInterfaceType.None);
+            if (!await checkInternetConnection())
+                throw new Exception("No Internet Connection"); //unhandled excpetion closes the app!
+            navigateToNextPage();
+        }
 
-            if (isConnectionAvailable == false)
+        private async void navigateToNextPage()
+        {
+            bool skipLogin = await LoginScreen.isThereTokenFile();
+            if (!skipLogin)
             {
-                MessageBox.Show("You need Internet conncetion in order to use this app.", "You are not connected.", MessageBoxButton.OK);
+                NavigationService.Navigate(new Uri("/LoginScreen.xaml", UriKind.Relative));
             }
             else
             {
-                NavigationService.Navigate(new Uri("/PivotMainPage.xaml", UriKind.Relative));
+                try
+                {
+                    await LoginScreen.getAccessToken();
+                    NavigationService.Navigate(new Uri("/PivotMainPage.xaml", UriKind.Relative));
+                }
+                catch(Exception)
+                {
+                    NavigationService.Navigate(new Uri("/LoginScreen.xaml", UriKind.Relative));
+                }
             }
+        }
+
+        private async Task<bool> checkInternetConnection()
+        {
+            bool isConnectionAvailable = await Task.Run(() => (NetworkInterface.NetworkInterfaceType != NetworkInterfaceType.None));
+
+            if (isConnectionAvailable == false)
+            {
+                MessageBox.Show("You need Internet connection in order to use this app.", "You are not connected.", MessageBoxButton.OK);
+                return false;
+            }
+            return true;
         }
     }
 }

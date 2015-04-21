@@ -11,25 +11,13 @@
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait" Orientation="Portrait"
     mc:Ignorable="d"
-    shell:SystemTray.IsVisible="True" Background="#FF2474A9">
+    shell:SystemTray.IsVisible="True">
 
-    <!--LayoutRoot is the root grid where all page content is placed-->
-    <Grid x:Name="LayoutRoot" Background="#FF2474A9">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-
-        <!--TitlePanel contains the name of the application and page title-->
-        <StackPanel Grid.Row="0" Margin="12,17,0,28"/>
-
-        <!--ContentPanel - place additional content here-->
-        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
-            <Image HorizontalAlignment="Center" Height="133" Margin="10,169,0,0" VerticalAlignment="Top" Width="436" Source="/Assets/AtosLogo.png"/>
-            <TextBlock HorizontalAlignment="Center" Margin="4,348,0,0" TextWrapping="Wrap" Text="Please Login using your Google Account" VerticalAlignment="Top" Foreground="#DEFFFFFF"/>
-            <Button Content="Login" HorizontalAlignment="Center" Margin="0,380,0,0" VerticalAlignment="Top" Width="279" Foreground="#DEFFFFFF" Click="Button_Click"/>
-
-        </Grid>
+    <Grid x:Name="LayoutRoot" Height="auto" Width="auto" Background="#FF2474A9">
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Image Height="133" Width="436" Source="/Assets/AtosLogo.png"/>
+            <ProgressBar Margin="0,80,0,0" Foreground="White" IsIndeterminate="True"/>
+        </StackPanel>
     </Grid>
-
+    
 </phone:PhoneApplicationPage>

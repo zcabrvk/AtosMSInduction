@@ -18,13 +18,6 @@ namespace AtosInduction
         {
             InitializeComponent();
 
-            ApplicationBar = new ApplicationBar();
-
-            ApplicationBar.Mode = ApplicationBarMode.Default;
-            ApplicationBar.Opacity = 1.0;
-            ApplicationBar.IsVisible = true;
-            ApplicationBar.IsMenuEnabled = true;
-
             ApplicationBarMenuItem item;
             foreach (Tab tab in WebBrowser.tabs) //Add a menu item for each tab 
             {
