@@ -18,7 +18,7 @@ namespace AtosInduction
 {
     public partial class PivotMainPage : PhoneApplicationPage
     {
-        private static List<Tab> currentTabList;
+        private static List<Tab> currentTabList = (Application.Current.Resources["atostabs"] as ObservableCollection<Tab>).ToList<Tab>();
 
         public PivotMainPage()
         {
@@ -78,12 +78,7 @@ namespace AtosInduction
         private void OpenPage(object sender, SelectionChangedEventArgs args)
         {
             NavigationService.Navigate(new Uri("/WebBrowser.xaml?url=" + ((sender as ListBox).SelectedValue as string), UriKind.RelativeOrAbsolute));
-
-            if (((sender as ListBox).Name as string).CompareTo("AtosTabs") == 0)
-                currentTabList = (this.Resources["atostabs"] as ObservableCollection<Tab>).ToList<Tab>();
-            else
-                currentTabList = (this.Resources["mstabs"] as ObservableCollection<Tab>).ToList<Tab>();
-
+            currentTabList = ((sender as ListBox).ItemsSource as ObservableCollection<Tab>).ToList<Tab>();
             (sender as ListBox).SelectedIndex = -1; //deselect item
         }
 

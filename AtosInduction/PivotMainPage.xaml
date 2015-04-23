@@ -5,7 +5,6 @@
     xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:src="clr-namespace:AtosInduction"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
@@ -20,16 +19,23 @@
             <shell:ApplicationBarIconButton IconUri="/Assets/AppBar2/back.png" Click="Logout" Text="logout"/>
         </shell:ApplicationBar>
     </phone:PhoneApplicationPage.ApplicationBar>
-
+    
+    <!--atostabs and mstabs resourcea declared in App.xaml-->
+    
     <phone:PhoneApplicationPage.Resources>
-        <src:AtosTabs x:Key="atostabs"/>
-        <src:MSTabs x:Key="mstabs"/>
         <DataTemplate x:Key="ListBoxItemTemplate">
             <StackPanel Orientation="Vertical">
                 <TextBlock Text="{Binding content}"/>
                 <TextBlock FontSize="{StaticResource PhoneFontSizeSmall}" Text="{Binding description}"/>
             </StackPanel>
         </DataTemplate>
+        <Style TargetType="ListBox">
+            <Setter Property="Foreground" Value="#FF2474A9"/>
+            <Setter Property="SelectedValuePath" Value="url"/>
+            <Setter Property="ItemTemplate" Value="{StaticResource ListBoxItemTemplate}"/>
+            <Setter Property="FontSize" Value="{StaticResource PhoneFontSizeExtraLarge}"/>
+            <Setter Property="Margin" Value="10,-20,0,0"/>
+        </Style>
     </phone:PhoneApplicationPage.Resources>
 
     <!--LayoutRoot is the root grid where all page content is placed-->
@@ -44,10 +50,10 @@
         </StackPanel>
         <phone:Pivot Name="Pivot" Grid.Row="1" Foreground="#FF2474A9" SelectionChanged="Pivot_SelectionChanged" FontFamily="Segoe WP Light" Margin="0,-20,0,0">
             <phone:PivotItem Header="about Atos">
-                <ListBox ItemTemplate="{StaticResource ListBoxItemTemplate}" ItemsSource="{StaticResource atostabs}" SelectedValuePath="url" Foreground="#FF2474A9" FontSize="{StaticResource PhoneFontSizeExtraLarge}" SelectionChanged="OpenPage" Margin="10,-20,0,0"/>
+                <ListBox ItemsSource="{StaticResource atostabs}" SelectionChanged="OpenPage"/>
             </phone:PivotItem>
             <phone:PivotItem Header="MS Induction">
-                <ListBox ItemTemplate="{StaticResource ListBoxItemTemplate}" ItemsSource="{StaticResource mstabs}" SelectedValuePath="url" Foreground="#FF2474A9" FontSize="{StaticResource PhoneFontSizeExtraLarge}" SelectionChanged="OpenPage" Margin="10,-20,0,0"/>
+                <ListBox ItemsSource="{StaticResource mstabs}" SelectionChanged="OpenPage"/>
             </phone:PivotItem>
         </phone:Pivot>
     </Grid>
