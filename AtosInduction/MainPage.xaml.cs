@@ -34,7 +34,7 @@ namespace AtosInduction
 
         private async void navigateToNextPage()
         {
-            bool skipLogin = await LoginScreen.isThereTokenFile();
+            bool skipLogin = await LoginProcess.isThereTokenFile();
             if (!skipLogin)
             {
                 NavigationService.Navigate(new Uri("/LoginScreen.xaml", UriKind.Relative));
@@ -43,7 +43,7 @@ namespace AtosInduction
             {
                 try
                 {
-                    await LoginScreen.getAccessToken();
+                    await LoginProcess.getAccessToken();
                     NavigationService.Navigate(new Uri("/PivotMainPage.xaml", UriKind.Relative));
                 }
                 catch(Exception)
