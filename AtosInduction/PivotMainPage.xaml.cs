@@ -28,37 +28,12 @@ namespace AtosInduction
 
         private async void setName()
         {
-            string key;
-            try
-            {
-                key = await LoginProcess.getAccessToken();
-            }
-            catch (Exception)
-            {
-                key = "";
-            }
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create("https://www.googleapis.com/plus/v1/people/me?fields=displayName");
-            request.Method = "GET";
-            request.Headers["Authorization"] = "Bearer " + key;
-            string textToDisplay;
+            string name = await MainPage.database.getUserFullName();
 
-            using (HttpWebResponse response = await request.GetResponseAsync())
-            {
-                if (response.StatusCode == HttpStatusCode.OK) //successful query!
-                {
-                    using (StreamReader streamReader = new StreamReader(response.GetResponseStream()))
-                    {
-                        string str = streamReader.ReadToEnd();
-                        string name;
-                        JsonConvert.DeserializeObject<Dictionary<string, string>>(str).TryGetValue("displayName", out name);
-                        textToDisplay = "Welcome " + name;
-                    }
-                }
-                else
-                    textToDisplay = "";
-            }
-
-            this.Name.Text = textToDisplay;
+            if (name.CompareTo("") == 0 || !name.All((char c) => { return (char.IsSeparator(c) || char.IsLetter(c)); })) //validates string
+                this.UserName.Visibility = System.Windows.Visibility.Collapsed; //query failed, hide ui element
+            else
+                this.UserName.Text = "Welcome " + name + "!";
         }
 
         //If the user press the back button exit the app (empty Navigation stack)
@@ -90,12 +65,7 @@ namespace AtosInduction
 
         private void Logout(object sender, EventArgs e)
         {
-            Task.Run(async () => {
-                HttpWebRequest request = (HttpWebRequest)WebRequest.Create("https://accounts.google.com/o/oauth2/revoke?token=" + await LoginProcess.getAccessToken());
-                await request.GetResponseAsync();
-                if (await LoginProcess.isThereTokenFile())
-                    LoginProcess.deleteTokenFile();
-                });
+            Task.Run(async () => { await MainPage.database.forceLogout();  });
             NavigationService.Navigate(new Uri("/LoginScreen.xaml", UriKind.RelativeOrAbsolute));
         }
     }

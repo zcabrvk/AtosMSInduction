@@ -41,11 +41,11 @@ namespace AtosInduction
             if(!App.loggedin)
             {
                 bool successful = false;
-                if (await LoginProcess.isThereTokenFile())
+                if (await MainPage.database.areUserDetailsLogged())
                 {
                     try
                     {
-                        await LoginProcess.getAccessToken();
+                        await MainPage.database.loginFromStoredDetails();
                         successful = true;
                     } catch (Exception)
                     {
@@ -56,7 +56,9 @@ namespace AtosInduction
                 {
                     try
                     {
-                        await LoginProcess.RequireAccess(this.keepLogged);
+                        await MainPage.database.performLoginProcess();
+                        if (keepLogged)
+                            await MainPage.database.storeLoginDetails();
                     } catch(Exception)
                     {
                         App.loggedin = false; //Access failed
@@ -77,7 +79,7 @@ namespace AtosInduction
             keepLogged = !keepLogged;
             if(keepLogged == false)
             {
-                LoginProcess.deleteTokenFile();
+                MainPage.database.deleteLoginDetails();
             }
         }
     }

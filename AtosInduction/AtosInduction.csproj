@@ -95,6 +95,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Database.cs" />
     <Compile Include="LoginProcess.cs" />
     <Compile Include="GoogleScopes.cs" />
     <Compile Include="HttpWebRequestExtensions.cs" />

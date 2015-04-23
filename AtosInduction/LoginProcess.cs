@@ -11,7 +11,7 @@ using Windows.Storage.Streams;
 
 namespace AtosInduction
 {
-    static class LoginProcess
+    class LoginProcess : Database
     {
         private const string tokenFileName = "tokens.json";
         private const string clientSecret = "19sLbhJNc_3EDfGaRwg-Bw48";
@@ -19,7 +19,50 @@ namespace AtosInduction
         private static readonly OAuthAuthorization auth = new OAuthAuthorization("https://accounts.google.com/o/oauth2/auth", "https://accounts.google.com/o/oauth2/token");
         private static TokenPair tokens;
 
-        public static async Task<string> getAccessToken()
+        public async Task<string> getUserFullName()
+        {
+            string key;
+            try
+            {
+                key = await getAccessToken();
+            }
+            catch (Exception)
+            {
+                key = "";
+            }
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create("https://www.googleapis.com/plus/v1/people/me?fields=displayName");
+            request.Method = "GET";
+            request.Headers["Authorization"] = "Bearer " + key;
+            string fullName;
+
+            using (HttpWebResponse response = await request.GetResponseAsync())
+            {
+                if (response.StatusCode == HttpStatusCode.OK) //successful query!
+                {
+                    using (StreamReader streamReader = new StreamReader(response.GetResponseStream()))
+                    {
+                        string str = streamReader.ReadToEnd();
+                        string name;
+                        JsonConvert.DeserializeObject<Dictionary<string, string>>(str).TryGetValue("displayName", out name);
+                        fullName = name;
+                    }
+                }
+                else
+                    fullName = "";
+            }
+
+            return fullName;
+        }
+
+        public async Task forceLogout()
+        {
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create("https://accounts.google.com/o/oauth2/revoke?token=" + await getAccessToken());
+            await request.GetResponseAsync();
+            if (await areUserDetailsLogged())
+                await deleteLoginDetails();
+        }
+
+        private async Task<string> getAccessToken()
         {
             if (tokens != null)
             {
@@ -32,7 +75,7 @@ namespace AtosInduction
                 return await getAccessTokenFromFile();
         }
 
-        private static async Task<bool> testAccessToken(string accessToken)
+        private async Task<bool> testAccessToken(string accessToken)
         {
             //test if token is still valid!
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create("https://www.googleapis.com/oauth2/v1/tokeninfo?fields=audience&access_token=" + accessToken);
@@ -54,7 +97,31 @@ namespace AtosInduction
             }
         }
 
-        private static async Task<string> getAccessTokenFromFile()
+        public async Task loginFromStoredDetails()
+        {
+            await getAccessToken();
+        }
+
+        public async Task storeLoginDetails()
+        {
+            if (tokens == null)
+                throw new Exception("Cannot store login details since the user is not Logged In");
+
+            string json = JsonConvert.SerializeObject(tokens);
+            StorageFile tokenFile = await ApplicationData.Current.LocalFolder.CreateFileAsync(tokenFileName,
+                                         CreationCollisionOption.ReplaceExisting);
+
+            using (IRandomAccessStream textStream = await tokenFile.OpenAsync(FileAccessMode.ReadWrite))
+            {
+                using (DataWriter textWriter = new DataWriter(textStream))
+                {
+                    textWriter.WriteString(json);
+                    await textWriter.StoreAsync();
+                }
+            }
+        }
+
+        private async Task<string> getAccessTokenFromFile()
         {
             StorageFile tokenFile = await getTokenFile();
             TokenPair tokenPair;
@@ -78,31 +145,16 @@ namespace AtosInduction
                 return await requestNewToken(tokenPair.RefreshToken);
         }
 
-        public static async Task RequireAccess(bool keepLogged)
+        public async Task performLoginProcess()
         {
             TokenPair tokenPair = await auth.Authorize(
                 clientId,
                 clientSecret,
                 new string[] { GoogleScopes.GooglePlus });
             tokens = tokenPair;
-            if (keepLogged)
-            {
-                string json = JsonConvert.SerializeObject(tokenPair);
-                StorageFile tokenFile = await ApplicationData.Current.LocalFolder.CreateFileAsync(tokenFileName,
-                                             CreationCollisionOption.ReplaceExisting);
-
-                using (IRandomAccessStream textStream = await tokenFile.OpenAsync(FileAccessMode.ReadWrite))
-                {
-                    using (DataWriter textWriter = new DataWriter(textStream))
-                    {
-                        textWriter.WriteString(json);
-                        await textWriter.StoreAsync();
-                    }
-                }
-            }
         }
 
-        private static async Task<string> requestNewToken(string refreshToken)
+        private async Task<string> requestNewToken(string refreshToken)
         {
             // Request a new access token using the refresh token (when the access token was expired)
             TokenPair tokenPair = await auth.RefreshAccessToken(
@@ -118,7 +170,7 @@ namespace AtosInduction
             return tokenPair.AccessToken;
         }
 
-        private static async Task<StorageFile> getTokenFile()
+        private async Task<StorageFile> getTokenFile()
         {
             StorageFolder folder = ApplicationData.Current.LocalFolder;
             StorageFile tokenFile;
@@ -133,7 +185,7 @@ namespace AtosInduction
             return tokenFile;
         }
 
-        public static async Task<bool> isThereTokenFile()
+        public async Task<bool> areUserDetailsLogged()
         {
             StorageFile tokenFile = await getTokenFile();
 
@@ -145,11 +197,11 @@ namespace AtosInduction
                 return false;
         }
 
-        public static async void deleteTokenFile()
+        public async Task deleteLoginDetails()
         {
             await Task.Run(async () =>
             {
-                if (await isThereTokenFile())
+                if (await areUserDetailsLogged())
                 {
                     StorageFile file = await getTokenFile();
                     await file.DeleteAsync();
