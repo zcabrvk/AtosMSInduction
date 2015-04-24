@@ -21,6 +21,8 @@ namespace AtosInduction
 {
     public partial class MainPage : PhoneApplicationPage
     {
+        public static readonly Database database = new LoginProcess();
+
         public MainPage() {
             InitializeComponent();
         }
@@ -34,7 +36,7 @@ namespace AtosInduction
 
         private async void navigateToNextPage()
         {
-            bool skipLogin = await LoginScreen.isThereTokenFile();
+            bool skipLogin = await database.areUserDetailsLogged();
             if (!skipLogin)
             {
                 NavigationService.Navigate(new Uri("/LoginScreen.xaml", UriKind.Relative));
@@ -43,7 +45,7 @@ namespace AtosInduction
             {
                 try
                 {
-                    await LoginScreen.getAccessToken();
+                    await database.loginFromStoredDetails();
                     NavigationService.Navigate(new Uri("/PivotMainPage.xaml", UriKind.Relative));
                 }
                 catch(Exception)

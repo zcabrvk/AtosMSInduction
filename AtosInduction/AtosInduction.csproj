@@ -95,6 +95,8 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Database.cs" />
+    <Compile Include="LoginProcess.cs" />
     <Compile Include="GoogleScopes.cs" />
     <Compile Include="HttpWebRequestExtensions.cs" />
     <Compile Include="LocalizedStrings.cs" />
@@ -117,6 +119,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>AppResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Tabs.cs" />
     <Compile Include="TokenPair.cs" />
     <Compile Include="WebBrowser.xaml.cs">
       <DependentUpon>WebBrowser.xaml</DependentUpon>

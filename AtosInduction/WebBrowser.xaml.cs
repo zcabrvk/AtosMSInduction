@@ -12,14 +12,14 @@ namespace AtosInduction
 {
     public partial class WebBrowser : PhoneApplicationPage
     {
-        public static IReadOnlyList<Tab> tabs; //set by PivotMainPage when navigating to this page
+        private readonly IReadOnlyList<Tab> tabs = PivotMainPage.getTabsIterator(); //set by PivotMainPage when navigating to this page
 
         public WebBrowser()
         {
             InitializeComponent();
 
             ApplicationBarMenuItem item;
-            foreach (Tab tab in WebBrowser.tabs) //Add a menu item for each tab 
+            foreach (Tab tab in tabs) //Add a menu item for each tab 
             {
                 item = new ApplicationBarMenuItem();
                 item.Text = (string)tab.content;
@@ -36,7 +36,7 @@ namespace AtosInduction
             {
                 if (pressed.Text.CompareTo(item.Text) == 0)
                 {
-                    this.Browser.Navigate(new Uri(WebBrowser.tabs.ElementAt(i).url));
+                    this.Browser.Navigate(new Uri(tabs.ElementAt(i).url));
                 }
                 i++;
             }
