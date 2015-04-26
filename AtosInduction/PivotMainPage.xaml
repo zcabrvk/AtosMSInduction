@@ -50,7 +50,9 @@
         </StackPanel>
         <phone:Pivot Name="Pivot" Grid.Row="1" Foreground="#FF2474A9" SelectionChanged="Pivot_SelectionChanged" FontFamily="Segoe WP Light" Margin="0,-20,0,0">
             <phone:PivotItem Header="about Atos">
-                <ListBox ItemsSource="{StaticResource atostabs}" SelectionChanged="OpenPage"/>
+                <Grid Margin="10,-20,0,0">
+                    <ListBox ItemsSource="{StaticResource atostabs}" SelectionChanged="OpenPage" Margin="0"/>
+                </Grid>
             </phone:PivotItem>
             <phone:PivotItem Header="MS Induction">
                 <ListBox ItemsSource="{StaticResource mstabs}" SelectionChanged="OpenPage"/>

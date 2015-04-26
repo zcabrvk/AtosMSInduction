@@ -159,6 +159,12 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App Large Icon.png" />
+    <Content Include="App Medium Icon.png" />
+    <Content Include="App Tile Icon.png" />
+    <Content Include="AppLargeIcon.png" />
+    <Content Include="AppMediumIcon.png" />
+    <Content Include="AppTileIcon.png" />
     <Content Include="Assets\AlignmentGrid.png" />
     <Content Include="Assets\AppBar1\cancel.png" />
     <Content Include="Assets\AppBar2\back.png" />
