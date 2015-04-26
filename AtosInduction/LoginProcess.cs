@@ -8,10 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using Windows.Storage;
 using Windows.Storage.Streams;
+using System.Runtime.Serialization;
 
 namespace AtosInduction
 {
-    class LoginProcess : Database
+    public class LoginProcess : Database
     {
         private const string tokenFileName = "tokens.json";
         private const string clientSecret = "19sLbhJNc_3EDfGaRwg-Bw48";

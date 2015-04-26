@@ -18,10 +18,11 @@ namespace AtosInduction
         /// <returns>The root frame of the Phone Application.</returns>
         public static PhoneApplicationFrame RootFrame { get; private set; }
 
+        public static bool loggedin = false;
+
         /// <summary>
         /// Constructor for the Application object.
         /// </summary>
-        public static bool loggedin = false;
         public App()
         {
             // Global handler for uncaught exceptions.

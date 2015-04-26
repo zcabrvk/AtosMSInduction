@@ -8,6 +8,7 @@ namespace AtosInduction
 {
     /// <summary>
     /// Interface to decouple application from implementation of queries to database.
+    /// Implementing classes be serializable (have DataContract attribute).
     /// </summary>
     public interface Database
     {

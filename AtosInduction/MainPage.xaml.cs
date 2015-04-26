@@ -21,10 +21,11 @@ namespace AtosInduction
 {
     public partial class MainPage : PhoneApplicationPage
     {
-        public static readonly Database database = new LoginProcess();
+        private readonly Database database = new LoginProcess();
 
         public MainPage() {
             InitializeComponent();
+            PhoneApplicationService.Current.State["database"] = database;
         }
 
         protected override async void OnNavigatedTo(NavigationEventArgs e)

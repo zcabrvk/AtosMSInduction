@@ -22,6 +22,7 @@ namespace AtosInduction
 {
     public partial class LoginScreen : PhoneApplicationPage
     {
+        private readonly Database database = PhoneApplicationService.Current.State["database"] as Database;
         private bool keepLogged = false;
 
         public LoginScreen()
@@ -41,14 +42,16 @@ namespace AtosInduction
             if(!App.loggedin)
             {
                 bool successful = false;
-                if (await MainPage.database.areUserDetailsLogged())
+                if (await database.areUserDetailsLogged())
                 {
                     try
                     {
-                        await MainPage.database.loginFromStoredDetails();
+                        await database.loginFromStoredDetails();
                         successful = true;
+                        App.loggedin = true;
                     } catch (Exception)
                     {
+                        App.loggedin = false;
                         successful = false;
                     }
                 }
@@ -56,9 +59,10 @@ namespace AtosInduction
                 {
                     try
                     {
-                        await MainPage.database.performLoginProcess();
+                        await database.performLoginProcess();
                         if (keepLogged)
-                            await MainPage.database.storeLoginDetails();
+                            await Task.Run(async () => { await database.storeLoginDetails(); });
+                        App.loggedin = true;
                     } catch(Exception)
                     {
                         App.loggedin = false; //Access failed
@@ -70,8 +74,10 @@ namespace AtosInduction
         private async void Button_Click(object sender, RoutedEventArgs e)
         {
             await Login();
-            if(App.loggedin)
+            if (App.loggedin)
+            {
                 NavigationService.Navigate(new Uri("/PivotMainPage.xaml", UriKind.Relative));
+            }
         }
 
         private void CheckBoxChanged(object sender, RoutedEventArgs e)
@@ -79,7 +85,7 @@ namespace AtosInduction
             keepLogged = !keepLogged;
             if(keepLogged == false)
             {
-                MainPage.database.deleteLoginDetails();
+                database.deleteLoginDetails();
             }
         }
     }

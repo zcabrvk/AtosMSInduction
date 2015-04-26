@@ -18,7 +18,7 @@ namespace AtosInduction
 {
     public partial class PivotMainPage : PhoneApplicationPage
     {
-        private static List<Tab> currentTabList = (Application.Current.Resources["atostabs"] as ObservableCollection<Tab>).ToList<Tab>();
+        private readonly Database database = PhoneApplicationService.Current.State["database"] as Database;
 
         public PivotMainPage()
         {
@@ -28,12 +28,12 @@ namespace AtosInduction
 
         private async void setName()
         {
-            string name = await MainPage.database.getUserFullName();
+            string name = await database.getUserFullName();
 
-            if (name.CompareTo("") == 0 || !name.All((char c) => { return (char.IsSeparator(c) || char.IsLetter(c)); })) //validates string
+            if (string.IsNullOrEmpty(name) || !name.All((char c) => { return (char.IsSeparator(c) || char.IsLetter(c)); })) //validates string
                 this.UserName.Visibility = System.Windows.Visibility.Collapsed; //query failed, hide ui element
             else
-                this.UserName.Text = "Welcome " + name + "!";
+                this.UserName.Text = "Welcome " + name;
         }
 
         //If the user press the back button exit the app (empty Navigation stack)
@@ -45,16 +45,14 @@ namespace AtosInduction
             }
         }
 
-        public static IReadOnlyList<Tab> getTabsIterator()
-        {
-            return currentTabList.AsReadOnly();
-        }
-
         private void OpenPage(object sender, SelectionChangedEventArgs args)
         {
-            NavigationService.Navigate(new Uri("/WebBrowser.xaml?url=" + ((sender as ListBox).SelectedValue as string), UriKind.RelativeOrAbsolute));
-            currentTabList = ((sender as ListBox).ItemsSource as ObservableCollection<Tab>).ToList<Tab>();
-            (sender as ListBox).SelectedIndex = -1; //deselect item
+            if ((sender as ListBox).SelectedIndex != -1)
+            {
+                PhoneApplicationService.Current.State["tabs"] = ((sender as ListBox).ItemsSource as ObservableCollection<Tab>).ToList<Tab>();
+                NavigationService.Navigate(new Uri("/WebBrowser.xaml?url=" + (sender as ListBox).SelectedValue, UriKind.RelativeOrAbsolute));
+                (sender as ListBox).SelectedIndex = -1; //deselect item
+            }
         }
 
         private void Pivot_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -65,7 +63,8 @@ namespace AtosInduction
 
         private void Logout(object sender, EventArgs e)
         {
-            Task.Run(async () => { await MainPage.database.forceLogout();  });
+            Task.Run(async () => { await database.forceLogout();  });
+            App.loggedin = false;
             NavigationService.Navigate(new Uri("/LoginScreen.xaml", UriKind.RelativeOrAbsolute));
         }
     }

@@ -12,7 +12,7 @@ namespace AtosInduction
 {
     public partial class WebBrowser : PhoneApplicationPage
     {
-        private readonly IReadOnlyList<Tab> tabs = PivotMainPage.getTabsIterator(); //set by PivotMainPage when navigating to this page
+        private readonly List<Tab> tabs = PhoneApplicationService.Current.State["tabs"] as List<Tab>;
 
         public WebBrowser()
         {
@@ -22,7 +22,7 @@ namespace AtosInduction
             foreach (Tab tab in tabs) //Add a menu item for each tab 
             {
                 item = new ApplicationBarMenuItem();
-                item.Text = (string)tab.content;
+                item.Text = tab.content;
                 item.Click += new EventHandler(Click);
                 ApplicationBar.MenuItems.Add(item);
             }
@@ -47,11 +47,10 @@ namespace AtosInduction
             base.OnNavigatedTo(e);
 
             string url;
-
             try
             {
-                if (NavigationContext.QueryString.TryGetValue("url", out url))
-                    this.Browser.Navigate(new Uri(url));
+                NavigationContext.QueryString.TryGetValue("url", out url);
+                this.Browser.Navigate(new Uri(url));
             }
             catch (Exception)
             {

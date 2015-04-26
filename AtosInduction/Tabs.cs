@@ -4,13 +4,17 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Runtime.Serialization;
 
 namespace AtosInduction
 {
+    [DataContract]
     public class Tab
     {
+        [DataMember]
         public string content { get; private set; }
         public string description { get; private set; }
+        [DataMember]
         public string url { get; private set; }
 
         public Tab(string content, string description, string url)
