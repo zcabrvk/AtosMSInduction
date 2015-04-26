@@ -68,5 +68,10 @@ namespace AtosInduction
             Task.Run(async () => { await MainPage.database.forceLogout();  });
             NavigationService.Navigate(new Uri("/LoginScreen.xaml", UriKind.RelativeOrAbsolute));
         }
+
+        private void Pivot_Loaded(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

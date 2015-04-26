@@ -25,13 +25,13 @@ namespace AtosInduction
     {
         public AtosTabs()
         {
-            Add(new Tab("Home", "description", "http://atos.net"));
-            Add(new Tab("Who Are Atos?", "description", "http://atos.net/en-us/home/we-are.html"));
-            Add(new Tab("Where do I fit?", "description", "http://atos.net/en-us/home/we-do/application-management.html"));
-            Add(new Tab("Atos customers", "description", "http://atos.net/en-us/home/we-are/our-customers.html"));
-            Add(new Tab("Company structure", "description", "http://atos.net/en-us/home/we-are/company-profile.html"));
-            Add(new Tab("Operational targets", "description", "http://atos.net/en-us/home/we-are/company-profile/corporate-values.html"));
-            Add(new Tab("Where next?", "description", "http://atos.net/en-us/home/we-are/insights-innovation.html"));
+            Add(new Tab("Home", "The central to Atos", "http://atos.net"));
+            Add(new Tab("Who Are Atos?", "Learn more about the company", "http://atos.net/en-us/home/we-are.html"));
+            Add(new Tab("Where do I fit?", "Where do you belong in Atos?", "http://atos.net/en-us/home/we-do/application-management.html"));
+            Add(new Tab("Atos customers", "Because we care", "http://atos.net/en-us/home/we-are/our-customers.html"));
+            Add(new Tab("Company structure", "Bringing together people and technology", "http://atos.net/en-us/home/we-are/company-profile.html"));
+            Add(new Tab("Operational targets", "Aiming to achieve", "http://atos.net/en-us/home/we-are/company-profile/corporate-values.html"));
+            Add(new Tab("Where next?", "Where do we go from here?", "http://atos.net/en-us/home/we-are/insights-innovation.html"));
         }
     }
 
@@ -39,12 +39,12 @@ namespace AtosInduction
     {
         public MSTabs()
         {
-            Add(new Tab("Home", "description", "http://atos.net/en-us/home/your-business/utilities/managed-services-for-utilities.html"));
-            Add(new Tab("Structure", "description", "http://atos.net/en-us/home/your-business/manufacturing.html"));
-            Add(new Tab("Operational Targets", "description", "http://atos.net/en-us/home/your-business/telecommunications/telecom-managed-operations.html"));
-            Add(new Tab("Essentials", "description", "http://atos.net/en-us/home/we-do/business-integration-solutions.html"));
-            Add(new Tab("Departement Induction", "description", "http://atos.net/en-us/home/we-do/project-services.html"));
-            Add(new Tab("Where Next?", "description", "http://atos.net/en-us/home/olympic-games.html"));
+            Add(new Tab("Home", "About Managed Services", "http://atos.net/en-us/home/your-business/utilities/managed-services-for-utilities.html"));
+            Add(new Tab("Structure", "Bringing together Managed Services", "http://atos.net/en-us/home/your-business/manufacturing.html"));
+            Add(new Tab("Operational Targets", "We aim to achieve.", "http://atos.net/en-us/home/your-business/telecommunications/telecom-managed-operations.html"));
+            Add(new Tab("Essentials", "The absolute neccessities", "http://atos.net/en-us/home/we-do/business-integration-solutions.html"));
+            Add(new Tab("Departement Induction", "Every journey has a beginning", "http://atos.net/en-us/home/we-do/project-services.html"));
+            Add(new Tab("Where Next?", "Where do we go from here?", "http://atos.net/en-us/home/olympic-games.html"));
         }
     }
 }
