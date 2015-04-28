@@ -12,34 +12,36 @@ namespace AtosInduction
 {
     public partial class WebBrowser : PhoneApplicationPage
     {
-        private readonly List<Tab> tabs = PhoneApplicationService.Current.State["tabs"] as List<Tab>;
+        private readonly IEnumerator<Tab> tabs = (IEnumerator<Tab>)PhoneApplicationService.Current.State["tabs"];
 
         public WebBrowser()
         {
             InitializeComponent();
 
             ApplicationBarMenuItem item;
-            foreach (Tab tab in tabs) //Add a menu item for each tab 
+            while (tabs.MoveNext())  //Add a menu item for each tab 
             {
+                Tab tab = tabs.Current;
                 item = new ApplicationBarMenuItem();
                 item.Text = tab.content;
                 item.Click += new EventHandler(Click);
                 ApplicationBar.MenuItems.Add(item);
             }
+            tabs.Reset();
         }
 
         private void Click(object sender, EventArgs e)
         {
             ApplicationBarMenuItem pressed = sender as ApplicationBarMenuItem;
-            int i = 0;
             foreach (ApplicationBarMenuItem item in ApplicationBar.MenuItems)
             {
+                tabs.MoveNext();
                 if (pressed.Text.CompareTo(item.Text) == 0)
                 {
-                    this.Browser.Navigate(new Uri(tabs.ElementAt(i).url));
+                    this.Browser.Navigate(new Uri(tabs.Current.url));
                 }
-                i++;
             }
+            tabs.Reset();
         }
 
         protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)

@@ -49,7 +49,7 @@ namespace AtosInduction
         {
             if ((sender as ListBox).SelectedIndex != -1)
             {
-                PhoneApplicationService.Current.State["tabs"] = ((sender as ListBox).ItemsSource as ObservableCollection<Tab>).ToList<Tab>();
+                PhoneApplicationService.Current.State["tabs"] = ((sender as ListBox).ItemsSource as ObservableCollection<Tab>).GetEnumerator();
                 NavigationService.Navigate(new Uri("/WebBrowser.xaml?url=" + (sender as ListBox).SelectedValue, UriKind.RelativeOrAbsolute));
                 (sender as ListBox).SelectedIndex = -1; //deselect item
             }
